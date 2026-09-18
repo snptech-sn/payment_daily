@@ -1,0 +1,6 @@
+{
+  "name": "កម្មវិធីគ្រប់គ្រងចំណូលចំណាយ",
+  "description": "កម្មវិធីគ្រប់គ្រងចំណូលចំណាយប្រចាំថ្ងៃ ប្រចាំខែ និងប្រចាំឆ្នាំ ដោយងាយស្រួល និងរហ័ស",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

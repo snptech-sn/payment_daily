@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["uid", "email"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "User personal income or expense transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "enum": ["USD", "KHR"] },
+        "category": { "type": "string", "maxLength": 64 },
+        "date": { "type": "string", "maxLength": 16 },
+        "paymentMethod": { "type": "string", "maxLength": 64 },
+        "note": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "type", "amount", "currency", "category", "date", "paymentMethod"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "User application settings and budget configuration",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "primaryCurrency": { "type": "string", "enum": ["USD", "KHR", "BOTH"] },
+        "exchangeRate": { "type": "number" },
+        "language": { "type": "string", "enum": ["km", "en"] },
+        "monthlyBudget": { "type": "number" },
+        "theme": { "type": "string", "enum": ["emerald", "indigo", "warm", "dark"] },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["userId", "primaryCurrency", "exchangeRate", "language", "theme"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile information"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "User income and expense financial records"
+    },
+    "/users/{userId}/settings/{settingsId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "User application preferences and budget configuration"
+    }
+  }
+}
